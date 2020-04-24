@@ -1,4 +1,4 @@
-package dummyapis
+package structs
 
 // Post struct
 type Post struct {

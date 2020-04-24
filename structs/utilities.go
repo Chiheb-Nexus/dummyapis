@@ -1,4 +1,4 @@
-package dummyapis
+package structs
 
 import (
 	"encoding/json"
@@ -8,6 +8,20 @@ import (
 	"path"
 	"strings"
 	"time"
+)
+
+var (
+	// BaseURL is the Base URL
+	BaseURL    string = "https://jsonplaceholder.typicode.com/"
+	userSample string = "samples/users_sample.json"
+	// UsersURL is the users data URL
+	UsersURL   string = URLJoin(BaseURL, "users")
+	toDoSample string = "samples/todo_sample.json"
+	// ToDoURL is todo users data URL
+	ToDoURL     string = URLJoin(BaseURL, "todos")
+	postsSample string = "samples/posts_sample.json"
+	// PostsURL is users posts data URL
+	PostsURL string = URLJoin(BaseURL, "posts")
 )
 
 // URLJoin a handler funcs to join URLs
@@ -29,7 +43,7 @@ func ReadFile(file string) []byte {
 
 // GetJSONDecoded reads & decodes JSON form URL
 func GetJSONDecoded(url string, target interface{}) error {
-	client := &http.Client{Timeout: 10 * time.Second} // Timeout
+	client := &http.Client{Timeout: 100 * time.Second} // Timeout
 	resp, err := client.Get(url)
 	if err != nil {
 		return nil

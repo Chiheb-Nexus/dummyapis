@@ -1,4 +1,4 @@
-package dummyapis
+package structs
 
 // ToDo struct
 type ToDo struct {

@@ -1,4 +1,4 @@
-package dummyapis
+package structs
 
 // UserAddressGeo is a part of User struct definition
 type UserAddressGeo struct {

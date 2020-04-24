@@ -1,4 +1,4 @@
-package dummyapis
+package structs
 
 /*
 Visit: https://jsonplaceholder.typicode.com/ for more testing URLS
@@ -8,16 +8,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"testing"
-)
-
-var (
-	baseURL     string = "https://jsonplaceholder.typicode.com/"
-	userSample  string = "samples/users_sample.json"
-	usersURL    string = URLJoin(baseURL, "users")
-	toDoSample  string = "samples/todo_sample.json"
-	toDoURL     string = URLJoin(baseURL, "todos")
-	postsSample string = "samples/posts_sample.json"
-	postsURL    string = URLJoin(baseURL, "posts")
 )
 
 func TestUserStructSample(t *testing.T) {
@@ -33,7 +23,7 @@ func TestUserStructSample(t *testing.T) {
 
 func TestUserStructHTTP(t *testing.T) {
 	users := make(Users, 0)
-	if err := GetJSONDecoded(usersURL, &users); err != nil {
+	if err := GetJSONDecoded(UsersURL, &users); err != nil {
 		msg := fmt.Sprintf("Error while requesting Users URL: %v", err)
 		t.Fatal(msg)
 	} else {
@@ -54,7 +44,7 @@ func TestToDoStructSample(t *testing.T) {
 
 func TestToDoStructHTTP(t *testing.T) {
 	todos := make(ToDos, 0)
-	if err := GetJSONDecoded(toDoURL, &todos); err != nil {
+	if err := GetJSONDecoded(ToDoURL, &todos); err != nil {
 		msg := fmt.Sprintf("Error while requesting ToDo URL: %v", err)
 		t.Fatal(msg)
 	} else {
@@ -75,7 +65,7 @@ func TestPostStructSample(t *testing.T) {
 
 func TestPostStructHTTP(t *testing.T) {
 	posts := make(Posts, 0)
-	if err := GetJSONDecoded(postsURL, &posts); err != nil {
+	if err := GetJSONDecoded(PostsURL, &posts); err != nil {
 		msg := fmt.Sprintf("Error while requesting Posts URL: %v", err)
 		t.Fatal(msg)
 	} else {
