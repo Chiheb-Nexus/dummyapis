@@ -18,8 +18,36 @@ func main() {
 	users := <-usersChan
 	posts := <-postsChan
 	todos := <-todosChan
-	fmt.Println(users[:1], posts[:1], todos[:1])
+	formated := prettyFormat(users, posts, todos)
+	for userID, data := range formated {
+		fmt.Printf("########\n")
+		for key, value := range data {
+			fmt.Printf("<UserId: %d> %s: %v\n", userID, key, value)
+		}
+	}
 
+}
+
+func prettyFormat(users structs.Users, posts structs.Posts, todos structs.ToDos) map[int64]map[string]interface{} {
+	prettifier := make(map[int64]map[string]interface{})
+	for _, user := range users {
+		prettifier[user.ID] = make(map[string]interface{})
+		prettifier[user.ID]["username"] = user.Username
+		prettifier[user.ID]["name"] = user.Name
+	}
+	for _, post := range posts {
+		if value, ok := prettifier[post.UserID]; ok {
+			value["title"] = post.Title
+			value["body"] = post.Body
+		}
+	}
+	for _, todo := range todos {
+		if value, ok := prettifier[todo.UserID]; ok {
+			value["todoTitle"] = todo.Title
+			value["completed"] = todo.Completed
+		}
+	}
+	return prettifier
 }
 
 // GetUsers return all data from Users URL
