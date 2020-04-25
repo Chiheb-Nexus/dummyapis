@@ -58,6 +58,7 @@ func GetUsers(usersChan chan structs.Users) {
 	} else {
 		usersChan <- users
 	}
+	close(usersChan)
 }
 
 // GetPosts return all data from Posts URL
@@ -68,6 +69,7 @@ func GetPosts(postsChan chan structs.Posts) {
 	} else {
 		postsChan <- posts
 	}
+	close(postsChan)
 }
 
 // GetToDos return all data from ToDo URL
@@ -78,4 +80,5 @@ func GetToDos(todosChan chan structs.ToDos) {
 	} else {
 		todosChan <- todos
 	}
+	close(todosChan)
 }
